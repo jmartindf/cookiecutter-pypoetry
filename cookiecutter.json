@@ -13,4 +13,5 @@
   "use_mypy": "y",
   "install_precommit_hooks": "y",
   "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"]
+  "activate_direnv": "y",
 }
