@@ -13,5 +13,6 @@
   "use_mypy": "n",
   "install_precommit_hooks": "n",
   "activate_direnv": "y",
+  "legacy_code": "n",
   "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"],
 }

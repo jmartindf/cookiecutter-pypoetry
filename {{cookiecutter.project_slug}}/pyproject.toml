@@ -99,6 +99,7 @@ typeCheckingMode = "off"
 useLibraryCodeForTypes = true
 verboseOutput = true
 
+{%- if cookiecutter.legacy_code == 'y' %}
 # errors for functions and methods that have no type annotations for input parameters or return types
 analyzeUnannotatedFunctions = false
 
@@ -116,6 +117,7 @@ strictDictionaryInference = false
 
 # use strict type assumptions for the type of a set; for example, the expression {1, 'a', 3.4} as set[int | str | float] instead of set[Any]
 strictSetInference = false
+{%- endif %}
 
 # diagnostics for a variable that is not accessed
 reportUnusedVariable = "none"
@@ -173,7 +175,11 @@ target-version = "py310"
 [tool.ruff.format]
 # equivalent to Black's skip-string-normalization = true, for pre-existing code bases
 # the default is "double", for new projects
+{%- if cookiecutter.legacy_code == 'y' %}
+quote-style = "preserve"
+{%- else %}
 # quote-style = "preserve"
+{%- endif %}
 
 [tool.ruff.lint]
 # Enable codes by default:
