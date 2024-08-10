@@ -15,4 +15,30 @@
   "activate_direnv": "y",
   "legacy_code": "n",
   "_copy_without_render": ["docs/changelog.md", "docs/contributing.md", "docs/index.md", ".github/workflows/*.yml"],
+  "__prompts__": {
+    "project_name": "Select your human-readable project name",
+    "pkg_name": "Select your package name",
+    "project_slug": "Select your package's PEP-something compatible slug",
+    "project_short_description": "Short description",
+    "full_name": "Author full name",
+    "email": "Author email",
+    "github_username": "GitHub username or organization",
+    "version": "Select your project's current version",
+    "command_line_interface": "Add CLI",
+    "use_mypy": "Use MyPy for type checking",
+    "install_precommit_hooks": "Install and use pre-commit hooks",
+    "activate_direnv": "Create .envrc and run direnv allow",
+    "legacy_code": "Importing a legacy codebase to the project",
+    "open_source_license": {
+      "__prompt__": "Select your project's Open Source license",
+      "BlueOak-1.0.0": "Blue Oak Model License",
+      "BSD-2-Clause-Patent": "BSD+Patent",
+      "MIT": "MIT license",
+      "BSD-3-Clause": "3-clause BSD license",
+      "ISC": "ISC License",
+      "Apache-2.0": "Apache License 2.0",
+      "GPL-3.0-only": "GNU General Public License version 3",
+      "Not open source": ""
+    }
+  }
 }
