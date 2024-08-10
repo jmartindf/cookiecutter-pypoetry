@@ -1,0 +1,5 @@
+export DIRENV_LOG_FORMAT=
+nix_direnv_manual_reload
+use flake . --impure
+export name={{ cookiecutter.project_slug }}.devshell
+# layout poetry
