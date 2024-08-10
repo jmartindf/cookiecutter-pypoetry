@@ -42,7 +42,7 @@ ptpython = ">=3.0.25,<3.1"
 {%- if cookiecutter.command_line_interface|lower == 'click' %}
 click = "8.1.7"
 {%- endif %}
-
+basedpyright = { version = "^1.15.0", optional = true }
 ruff  = { version = "^0.5.2", optional = true}
 {%- if cookiecutter.use_mypy == 'y' %}
 mypy = {version = "^1.10.0", optional = true}
@@ -67,6 +67,7 @@ bump-my-version = {version = "^0.24.3", optional = true}
 [tool.poetry.extras]
 test = [
     "pytest",
+    "basedpyright",
     "ruff",
     {%- if cookiecutter.use_mypy == 'y' %}
     "mypy",
@@ -146,7 +147,7 @@ reportUnusedFunction = "none"
 
 # includes hover text, type completion, signature completion, find definition, find references, etc. This option is useful if you want to use pyright only as a type checker but want to run another Python language server for language service features
 # using Ruff for LSP and linting
-disableLanguageServices = false
+disableLanguageServices = true
 
 # Disables the “Organize Imports” command
 # use Ruff for import management
