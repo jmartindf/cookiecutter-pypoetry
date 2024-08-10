@@ -26,8 +26,6 @@ classifiers=[
 {%- endif %}
     'Natural Language :: English',
     'Programming Language :: Python :: 3 :: Only',
-    'Programming Language :: Python :: 3.8',
-    'Programming Language :: Python :: 3.9',
     'Programming Language :: Python :: 3.10',
     'Programming Language :: Python :: 3.11',
     'Programming Language :: Python :: 3.12',
@@ -89,38 +87,110 @@ doc = [
 {% if cookiecutter.command_line_interface|lower == 'click' -%}
 [tool.poetry.scripts]
 {{ cookiecutter.project_slug }} = '{{ cookiecutter.pkg_name }}.cli:main'
-
 {% endif -%}
-[tool.black]
-line-length = 120
-skip-string-normalization = true
-target-version = ['py38', 'py39', 'py310']
-include = '\.pyi?$'
-exclude = '''
-/(
-    \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | _build
-  | buck-out
-  | build
-  | dist
-)/
-'''
 
-[tool.isort]
-multi_line_output = 3
-include_trailing_comma = true
-force_grid_wrap = 0
-use_parentheses = true
-ensure_newline_before_comments = true
-line_length = 120
-skip_gitignore = true
-# you can skip files as below
-#skip_glob = docs/conf.py
+[tool.basedpyright]
+ignore = ["*"]
+
+pythonVersion = "3.10"
+pythonPlatform = "All"
+
+typeCheckingMode = "off"
+useLibraryCodeForTypes = true
+verboseOutput = true
+
+# errors for functions and methods that have no type annotations for input parameters or return types
+analyzeUnannotatedFunctions = false
+
+# PEP 484 indicates that when a function parameter is assigned a default value of None, its type should implicitly be Optional even if the explicit type is not. When enabled, this rule requires that parameter type annotations use Optional explicitly in this case.
+strictParameterNoneValue = false
+
+# PEP 484 defines support for # type: ignore comments. This switch enables or disables support for these comments. This option is discouraged in favor of # pyright: ignore comments in basedpyright, as they are safer
+enableTypeIgnoreComments = true
+
+# use strict type assumptions for the type of a list; for example, the expression [1, 'a', 3.4] as list[int | str | float] instead of list[Any]
+strictListInference = false
+
+# use strict type assumptions for a dictionary’s keys and values; for example, the expression {'a': 1, 'b': 'a'} as dict[str, int | str] instead of dict[str, Any]
+strictDictionaryInference = false
+
+# use strict type assumptions for the type of a set; for example, the expression {1, 'a', 3.4} as set[int | str | float] instead of set[Any]
+strictSetInference = false
+
+# diagnostics for a variable that is not accessed
+reportUnusedVariable = "none"
+
+# diagnostics for general type inconsistencies, unsupported operations, argument/parameter mismatches, etc
+reportGeneralTypeIssues = "none"
+
+# diagnostics for an attempt to subscript (index) a variable with an Optional type
+reportOptionalSubscript = "none"
+
+# diagnostics for an attempt to access a member of a variable with an Optional type
+reportOptionalMemberAccess = "none"
+
+# diagnostics for use of a symbol from a third party "py.typed" module that is not meant to be exported from that module
+reportPrivateImportUsage = "none"
+
+# diagnostics for a class with a private name (starting with an underscore) that is not accessed
+reportUnusedClass = "none"
+
+# diagnostics for an imported symbol that is not referenced within that file
+reportUnusedImport = "none"
+
+# diagnostics for a function or method with a private name (starting with an underscore) that is not accessed
+reportUnusedFunction = "none"
+
+# includes hover text, type completion, signature completion, find definition, find references, etc. This option is useful if you want to use pyright only as a type checker but want to run another Python language server for language service features
+# using Ruff for LSP and linting
+disableLanguageServices = false
+
+# Disables the “Organize Imports” command
+# use Ruff for import management
+disableOrganizeImports = true
+
+# hint diagnostics with special tags to tell the client to display text ranges in a "grayed out" manner (to indicate unreachable code or unreferenced symbols) or in a "strike through" manner (to indicate use of a deprecated feature)
+# Neo Vim is annoying about this
+disableTaggedHints = true
+
+[tool.basedpyright.analysis]
+# whether pyright offers auto-import completions
+autoImportCompletions = true
+
+# whether pyright automatically adds common search paths like "src" if there are no execution environments defined in the config file
+autoSearchPaths = true
+
+# whether pyright analyzes (and reports errors for) all files in the workspace, as indicated by the config file. If this option is set to "openFilesOnly", pyright analyzes only open files
+diagnosticMode = "openFilesOnly"
+
+[tool.ruff]
+line-length = 120
+indent-width = 4
+
+# Assume Python 3.10
+target-version = "py310"
+
+[tool.ruff.format]
+# equivalent to Black's skip-string-normalization = true, for pre-existing code bases
+# the default is "double", for new projects
+# quote-style = "preserve"
+
+[tool.ruff.lint]
+# Enable codes by default:
+# N = Teach me PEP-8 naming
+# UP = Help me keep my code up to date
+# ICN = Teach me proper import conventions
+# RET = Use proper return statements
+# SIM = Suggest simplifications
+# PTH = pathlib.Path is awesome
+# FURB = Useful code improvements (https://pypi.org/project/refurb/, https://docs.astral.sh/ruff/rules/#refurb-furb)
+select = ["N", "UP", "ICN", "RET", "SIM", "PTH", "FURB"]
+
+# And disable a few by default
+# F = The entire Pyflakes set
+# E = pycodestyle Errors
+# F401 = unused-import
+ignore = ["F401"]
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
